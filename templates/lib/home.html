@@ -1,0 +1,13 @@
+{% extends "index/main.html" %}
+
+{% block varcontent %}
+
+
+{% for section in sections%}
+{% if section.books%}
+{{ Section_title(section.name) }}
+{{ Book_list(section.books)}}
+{% endif %}
+{% endfor %}
+
+{% endblock %}

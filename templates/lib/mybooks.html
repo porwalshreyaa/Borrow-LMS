@@ -1,0 +1,68 @@
+{% extends "index/main.html" %}
+
+{% macro Mybooks_list(books) %}
+<div class="container row align-items-center justify-content-between gap-2">
+    <!-- book cards -->
+    {% if books%}
+    {% for book in books %}
+    <div class="card mb-3 bg-light align-items-center p-2 md-1" style="max-width: 300px;">
+        <div class="row g-0 justify-content-between">
+            <div class="col-md-5 mb-1">
+                <h6 style="" class="card-title text-center text-dark" class="card-title">Book: {{book._id}}
+                </h6>
+            </div>
+            <div class="col-5 mb-1">
+
+                <h6 style="" class="card-title text-center text-dark" class="card-title">Book: {{book.name}}
+                </h6>
+            </div>
+        </div>
+
+        <div class="row g-0  justify-content-between">
+            <div class="col-2 mb-1">
+                <a type="button" class="btn btn-warning" href="book/{{book._id}}">View</a>
+            </div>
+            <div class="col-md-2 mb-1">
+                <a type="button" class="btn btn-danger" href="return/book/{{book._id}}">Return</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    {% else %}
+    <h5 style="" class="card-title text-center text-dark" class="card-title"> You Have No Books currently.</h5>
+
+    <h6 style="" class="card-title text-center text-dark" class="card-title">Borrow some real quickk!!!</h6>
+
+    {% endif%}
+</div>
+{% endmacro %}
+
+{% block varcontent %}
+
+{% if read_books%}
+
+{{Section_title('Current Books')}}
+
+{{Mybooks_list(current_books)}}
+<br><br>
+
+{% else %}
+<br>
+<h5 style="" class="card-title text-center text-dark" class="card-title"> You Have No Books currently.</h5>
+
+<br>
+{% endif %}
+
+<br>
+
+{% if read_books%}
+
+{{Section_title('Past Books')}}
+
+{{Book_list(read_books)}}
+
+{% endif %}
+
+
+
+{% endblock %}

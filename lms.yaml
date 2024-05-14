@@ -1,0 +1,429 @@
+openapi: 3.0.0
+info:
+  description: "API for Library management system, MAD-1 Project"
+  version: 1.0.0
+  title: Library management system
+  contact:
+    email: porwalshreya11111@gmail.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+
+UserResource:
+  /api/user:
+    get:
+      description: Get all users or a specific user by ID
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    username:
+                      type: string
+                    email:
+                      type: string
+                    role:
+                      type: string
+                    access:
+                      type: string
+                    read_books:
+                      type: array
+                      items:
+                        type: string
+        404:
+          description: User not found
+    post:
+      description: Create a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+                email:
+                  type: string
+                role:
+                  type: string
+                access:
+                  type: string
+      responses:
+        201:
+          description: User created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  username:
+                    type: string
+                  email:
+                    type: string
+                  role:
+                    type: string
+                  access:
+                    type: string
+    put:
+      description: Update an existing user by ID
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+                email:
+                  type: string
+                role:
+                  type: string
+                access:
+                  type: string
+      responses:
+        200:
+          description: User updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  username:
+                    type: string
+                  email:
+                    type: string
+                  role:
+                    type: string
+                  access:
+                    type: string
+        404:
+          description: User not found
+    delete:
+      description: Delete a user by ID
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: User deleted successfully
+        404:
+          description: User not found
+
+BookResource:
+  /api/book:
+    get:
+      description: Get all books or a specific book by ID
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    name:
+                      type: string
+                    content:
+                      type: string
+                    path:
+                      type: string
+                    cover:
+                      type: string
+                    authors:
+                      type: string
+                    section:
+                      type: array
+                      items:
+                        type: string
+        404:
+          description: Book not found
+    post:
+      description: Create a new book
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                content:
+                  type: string
+                path:
+                  type: string
+                cover:
+                  type: string
+                authors:
+                  type: string
+      responses:
+        201:
+          description: Book created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  content:
+                    type: string
+                  path:
+                    type: string
+                  cover:
+                    type: string
+                  authors:
+                    type: string
+    put:
+      description: Update an existing book by ID
+      parameters:
+        - name: book_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                content:
+                  type: string
+                path:
+                  type: string
+                cover:
+                  type: string
+                authors:
+                  type: string
+      responses:
+        200:
+          description: Book updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  content:
+                    type: string
+                  path:
+                    type: string
+                  cover:
+                    type: string
+                  authors:
+                    type: string
+        404:
+          description: Book not found
+    delete:
+      description: Delete a book by ID
+      parameters:
+        - name: book_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Book deleted successfully
+        404:
+          description: Book not found
+
+SectionResource:
+  /api/section:
+    get:
+      description: Get all sections or a specific section by ID
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    name:
+                      type: string
+                    description:
+                      type: string
+                    dateCreated:
+                      type: string
+                    books:
+                      type: array
+                      items:
+                        type: string
+        404:
+          description: Section not found
+    post:
+      description: Create a new section
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+                dateCreated:
+                  type: string
+      responses:
+        201:
+          description: Section created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  description:
+                    type: string
+                  dateCreated:
+                    type: string
+                  books:
+                    type: array
+                    items:
+                      type: string
+    put:
+      description: Update an existing section by ID
+      parameters:
+        - name: section_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+                dateCreated:
+                  type: string
+      responses:
+        200:
+          description: Section updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  description:
+                    type: string
+                  dateCreated:
+                    type: string
+                  books:
+                    type: array
+                    items:
+                      type: string
+        404:
+          description: Section not found
+    delete:
+      description: Delete a section by ID
+      parameters:
+        - name: section_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Section deleted successfully
+        404:
+          description: Section not found
+
+BookAssignment:
+  /api/book/{book_id}/section/{section_id}:
+    post:
+      description: Assign a book to a section
+      parameters:
+        - name: book_id
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: section_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        201:
+          description: Book assigned successfully
+        400:
+          description: Book already assigned to section
+        404:
+          description: Book or section not found
+    delete:
+      description: Remove a book from a section
+      parameters:
+        - name: book_id
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: section_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Book removed from section
+        404:
+          description: Book or section not found
