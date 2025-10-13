@@ -1,0 +1,19 @@
+{% extends "index/main.html" %}
+
+{% block varcontent %}
+
+{% if section_results%}
+
+{{Section_list(section_results)}}
+
+{% endif %}
+
+
+{% if book_results %}
+
+{{Book_list(book_results)}}
+
+{% endif %}
+
+{% endblock %}
+

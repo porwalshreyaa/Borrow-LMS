@@ -1,0 +1,61 @@
+{% extends "/admin.html" %}
+
+
+{% macro User_list(users) -%}
+<div class="container row align-items-center justify-content-between gap-2">
+    <!-- book cards -->
+    {% for user in users %}
+
+    <div class="card mb-3 bg-light align-items-center p-2 md-1" style="max-width: 300px;">
+        <div class="row g-0">
+            <div class="row g-0 justify-content-between">
+                <div class="col-md-5 mb-1">
+                    <h5 style="" class="card-title text-center text-dark" class="card-title">User {{user._id}}
+                    </h5>
+                </div>
+                <div class="col-md-5 mb-1">
+                    <!-- <h5 style="font-weight: bold;" class="card-title text-center text-dark" class="card-title">{{request[0]}}
+                    </h5> -->
+                    <h6 class="card-title text-center">{{user.username}}</h6>
+                </div>
+                {% set object = 'user' %}
+                {% set id = user._id %}
+
+                <button id="deleteButton" onclick="handleDelete()" class="btn btn-danger" data-object="{{ object }}"
+                    data-id="{{ id }}">Delete</button>
+
+            </div>
+            {% if user.read_books%}
+            {% for book in user.read_books %}
+            <div class="row g-0 justify-content-between">
+                <div class="col-md-5 mb-1">
+                    <h6 style="" class="card-title text-center text-dark" class="card-title">Book: {{book._id}}
+                    </h6>
+                    <a type="button" class="btn btn-warning" href="book/{{book._id}}">View</a>
+                </div>
+                <div class="col-md-5 mb-1">
+
+                    <h6 style="" class="card-title text-center text-dark" class="card-title">Book: {{book.name}}
+                    </h6>
+                </div>
+
+            </div>
+            {% endfor %}
+            {% else %}
+            <div class="row g-0 justify-content-between">
+                <h6 style="" class="card-title text-center text-dark" class="card-title">0 Books Read
+                </h6>
+            </div>
+            {% endif%}
+        </div>
+    </div>
+    {% endfor %}
+
+</div>
+{%- endmacro %}
+
+
+{% block varcontent %}
+
+{{User_list(users)}}
+{% endblock%}
